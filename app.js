@@ -1,12 +1,12 @@
 // ===== COLOQUE A CONFIGURAÇÃO DO SEU FIREBASE AQUI =====
 const firebaseConfig = {
-  apiKey: "COLE_AQUI",
-  authDomain: "COLE_AQUI.firebaseapp.com",
-  databaseURL: "https://COLE_AQUI-default-rtdb.firebaseio.com",
-  projectId: "COLE_AQUI",
-  storageBucket: "COLE_AQUI.appspot.com",
-  messagingSenderId: "COLE_AQUI",
-  appId: "COLE_AQUI"
+  apiKey: "AIzaSyCdI11L3Y2GFCy4XzbpSwYGchEtFBzj6Sw",
+  authDomain: "ferramentas-projeto.firebaseapp.com",
+  databaseURL: "https://ferramentas-projeto.firebaseio.com/",
+  projectId: "ferramentas-projeto",
+  storageBucket: "ferramentas-projeto.appspot.com",
+  messagingSenderId: "877191590019",
+  appId: "1:877191590019:web:5288a02e29c7718753abb6"
 };
 
 firebase.initializeApp(firebaseConfig);
