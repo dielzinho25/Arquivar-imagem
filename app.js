@@ -1,6 +1,6 @@
 // ===== COLOQUE A CONFIGURAÇÃO DO SEU FIREBASE AQUI =====
 const firebaseConfig = {
-  apiKey: "AIzaSyDrtZxbKXk7hjlqBL_BLoZMTBdc5iqBCXo",
+  apiKey: "AIzaSyCdI11L3Y2GFCy4XzbpSwYGchEtFBzj6Sw",
   authDomain: "ferramentas-projeto.firebaseapp.com",
   databaseURL: "https://ferramentas-projeto.firebaseio.com/",
   projectId: "ferramentas-projeto",
@@ -10,6 +10,8 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+alert(firebaseConfig.apiKey);
 
 const auth = firebase.auth();
 const db = firebase.database();
