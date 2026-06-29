@@ -37,13 +37,13 @@ let messagesListenerRef = null;
 const $ = (id) => document.getElementById(id);
 
 function show(screenId) {
-  ["authScreen", "homeScreen", "chatScreen", "profileScreen"].forEach(id => {
-    const el = $(id);
-    if (el) el.classList.add("hidden");
-  });
-  $(screenId).classList.remove("hidden");
-}
+  document.getElementById("authScreen").style.display = "none";
+  document.getElementById("homeScreen").style.display = "none";
+  document.getElementById("chatScreen").style.display = "none";
+  document.getElementById("profileScreen").style.display = "none";
 
+  document.getElementById(screenId).style.display = "block";
+}
 function toast(msg) {
   alert(String(msg || "Erro desconhecido"));
 }
@@ -98,15 +98,16 @@ $("btnRegister").onclick = async () => {
   const pass = $("authPassword").value.trim();
 
   if (!name || !email || !pass) {
-    return toast("Preencha nome, email e senha.");
+    alert("Preencha nome, email e senha.");
+    return;
   }
 
   try {
     const result = await auth.createUserWithEmailAndPassword(email, pass);
-    const uid = result.user.uid;
+    currentUser = result.user;
 
-    await db.ref("usuarios/" + uid).set({
-      uid: uid,
+    await db.ref("usuarios/" + currentUser.uid).set({
+      uid: currentUser.uid,
       nome: name,
       email: email,
       foto: "",
@@ -115,13 +116,16 @@ $("btnRegister").onclick = async () => {
       ultimo_visto: Date.now()
     });
 
-    currentUser = result.user;
+    alert("Conta criada com sucesso!");
     show("homeScreen");
-    loadChats();
-    loadStatuses();
+
+    setTimeout(() => {
+      loadChats();
+      loadStatuses();
+    }, 500);
 
   } catch (e) {
-    firebaseError(e);
+    alert(e.message);
   }
 };
 
@@ -130,12 +134,12 @@ $("btnLogin").onclick = async () => {
   const pass = $("authPassword").value.trim();
 
   if (!email || !pass) {
-    return toast("Preencha email e senha.");
+    alert("Preencha email e senha.");
+    return;
   }
 
   try {
     const result = await auth.signInWithEmailAndPassword(email, pass);
-
     currentUser = result.user;
 
     await db.ref("usuarios/" + currentUser.uid).update({
@@ -143,15 +147,18 @@ $("btnLogin").onclick = async () => {
       ultimo_visto: Date.now()
     });
 
+    alert("Login feito com sucesso!");
     show("homeScreen");
-    loadChats();
-    loadStatuses();
+
+    setTimeout(() => {
+      loadChats();
+      loadStatuses();
+    }, 500);
 
   } catch (e) {
-    firebaseError(e);
+    alert(e.message);
   }
 };
-
 
 $("btnLogout").onclick = async () => {
   try {
