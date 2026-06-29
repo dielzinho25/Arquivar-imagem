@@ -11,7 +11,7 @@ const firebaseConfig = {
 };
 
 // Cole aqui embaixo
-const FCM_VAPID_KEY_V512 = "2P8q14O9lKUNBAddDdxT7hwWficzmI5pmWNdCWidCBw";
+const FCM_VAPID_KEY_V512 = "BDj7Zs8BErm_psR4W_ioDABv-zI5rjR6u6NOU0wWw2GW8SDm_drYfWAuszcRAQ3NnWvAOisJehKCUyV0Z-mgtec";
 
 
 firebase.initializeApp(firebaseConfig);
