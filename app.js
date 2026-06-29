@@ -2,7 +2,7 @@
 const firebaseConfig = {
   apiKey: "AIzaSyDrtZxbKXk7hjlqBL_BLoZMTBdc5iqBCXo",
   authDomain: "ferramentas-projeto.firebaseapp.com",
-  databaseURL: "https://ferramentas-projeto-default-rtdb.firebaseio.com",
+  databaseURL: "https://ferramentas-projeto.firebaseio.com/",
   projectId: "ferramentas-projeto",
   storageBucket: "ferramentas-projeto.appspot.com",
   messagingSenderId: "877191590019",
