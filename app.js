@@ -10,6 +10,8 @@ const firebaseConfig = {
   measurementId: "G-78H1JXYJXQ"
 };
 
+const FCM_VAPID_KEY_V512 = "BNVYSbKeSP3WM_puSG15NIO1bVIlh3pFs-dfGQsecuSjRQuoT_SuM8s8zmaqNgD1bQ5JrZle7WAYZeVigQ-6Xrg";
+
 firebase.initializeApp(firebaseConfig);
 const auth=firebase.auth(), db=firebase.database(), storage=firebase.storage();
 const $=id=>document.getElementById(id);
