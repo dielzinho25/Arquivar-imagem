@@ -2,13 +2,13 @@
 // Este app usa Firebase 8. Não coloque "import" neste arquivo.
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCdI11L3Y2GFCy4XzbpSwYGchEtFBzj6Sw",
+  apiKey: "AIzaSyDrtZxbKXk7hjlqBL_BLoZMTBdc5iqBCXo",
   authDomain: "ferramentas-projeto.firebaseapp.com",
   databaseURL: "https://ferramentas-projeto-default-rtdb.firebaseio.com",
   projectId: "ferramentas-projeto",
   storageBucket: "ferramentas-projeto.appspot.com",
   messagingSenderId: "877191590019",
-  appId: "1:877191590019:web:5288a02e29c7718753abb6"
+  appId: "1:877191590019:android:152d4d35bdd3024c53abb6",
 };
 
 // Limpa service worker antigo que podia carregar app.js antigo.
