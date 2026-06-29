@@ -97,21 +97,29 @@ $("btnRegister").onclick = async () => {
   const email = $("authEmail").value.trim().toLowerCase();
   const pass = $("authPassword").value.trim();
 
-  if (!name || !email || !pass) return toast("Preencha nome, email e senha.");
+  if (!name || !email || !pass) {
+    return toast("Preencha nome, email e senha.");
+  }
 
   try {
     const result = await auth.createUserWithEmailAndPassword(email, pass);
     const uid = result.user.uid;
 
     await db.ref("usuarios/" + uid).set({
-      uid,
+      uid: uid,
       nome: name,
-      email,
+      email: email,
       foto: "",
       recado: "Olá! Estou usando o Bate-papo.",
       online: true,
       ultimo_visto: Date.now()
     });
+
+    currentUser = result.user;
+    show("homeScreen");
+    loadChats();
+    loadStatuses();
+
   } catch (e) {
     firebaseError(e);
   }
@@ -121,14 +129,29 @@ $("btnLogin").onclick = async () => {
   const email = $("authEmail").value.trim().toLowerCase();
   const pass = $("authPassword").value.trim();
 
-  if (!email || !pass) return toast("Preencha email e senha.");
+  if (!email || !pass) {
+    return toast("Preencha email e senha.");
+  }
 
   try {
-    await auth.signInWithEmailAndPassword(email, pass);
+    const result = await auth.signInWithEmailAndPassword(email, pass);
+
+    currentUser = result.user;
+
+    await db.ref("usuarios/" + currentUser.uid).update({
+      online: true,
+      ultimo_visto: Date.now()
+    });
+
+    show("homeScreen");
+    loadChats();
+    loadStatuses();
+
   } catch (e) {
     firebaseError(e);
   }
 };
+
 
 $("btnLogout").onclick = async () => {
   try {
