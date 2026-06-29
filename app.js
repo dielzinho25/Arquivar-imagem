@@ -10,6 +10,10 @@ const firebaseConfig = {
   measurementId: "G-78H1JXYJXQ"
 };
 
+// Cole aqui embaixo
+const FCM_VAPID_KEY_V512 = "2P8q14O9lKUNBAddDdxT7hwWficzmI5pmWNdCWidCBw";
+
+
 firebase.initializeApp(firebaseConfig);
 const auth=firebase.auth(), db=firebase.database(), storage=firebase.storage();
 const $=id=>document.getElementById(id);
