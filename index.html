@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Bate-papo Avançado v509</title>
+  <link rel="manifest" href="manifest.json?v=509" />
+  <link rel="stylesheet" href="style.css?v=509" />
+  <meta name="theme-color" content="#00A884" />
+</head>
+<body>
+  <div id="app">
+    <section id="authScreen" class="screen center-screen">
+      <div class="auth-card glass">
+        <div class="logo-circle">💬</div>
+        <h1>Bate-papo</h1>
+        <p>Mensagens, fotos, áudio, documentos, localização, status, grupos e perfil.</p>
+        <input id="authName" placeholder="Seu nome" autocomplete="name" />
+        <input id="authEmail" type="email" placeholder="Email" autocomplete="email" />
+        <input id="authPassword" type="password" placeholder="Senha" autocomplete="current-password" />
+        <button id="btnRegister">Criar conta</button>
+        <button id="btnLogin" class="secondary">Entrar</button>
+        <small id="debugText"></small>
+      </div>
+    </section>
+
+    <section id="homeScreen" class="screen hidden">
+      <header class="topbar glass">
+        <div class="brand"><div class="mini-logo">💬</div><div><h2>Bate-papo</h2><small id="meOnline">online</small></div></div>
+        <div class="top-actions">
+          <button id="btnInstall" class="icon-btn hidden">📲</button>
+          <button id="btnNotify" class="icon-btn">🔔</button>
+          <button id="btnTheme" class="icon-btn">🌙</button>
+          <button id="btnProfile" class="icon-btn">👤</button>
+          <button id="btnLogout" class="danger-btn">Sair</button>
+        </div>
+      </header>
+
+      <nav class="tabs glass">
+        <button class="tab active" data-tab="chats">Conversas <span id="badgeChats" class="badge">0</span></button>
+        <button class="tab" data-tab="status">Status</button>
+        <button class="tab" data-tab="users">Contatos</button>
+        <button class="tab" data-tab="groups">Grupos</button>
+        <button class="tab" data-tab="calls">Chamadas</button>
+      </nav>
+
+      <main>
+        <div id="tabChats" class="tab-page"><input id="chatSearch" class="search" placeholder="Pesquisar conversa..." /><div id="chatList" class="list"></div></div>
+        <div id="tabStatus" class="tab-page hidden">
+          <div class="composer-card glass"><textarea id="statusText" placeholder="Digite seu status..."></textarea><div class="row"><input id="statusImage" type="file" accept="image/*" /><button id="btnPostStatus">Publicar</button></div></div>
+          <div id="statusList" class="list"></div>
+        </div>
+        <div id="tabUsers" class="tab-page hidden">
+          <div class="search-card glass"><input id="searchEmail" placeholder="Buscar por email do contato" /><button id="btnSearchUser">Buscar</button></div>
+          <div id="userList" class="list"></div>
+        </div>
+        <div id="tabGroups" class="tab-page hidden">
+          <div class="search-card glass">
+            <input id="groupName" placeholder="Nome do grupo" />
+            <div class="row"><button id="btnCreateGroup">Criar grupo</button><button id="btnRefreshGroups" class="secondary">Atualizar</button></div>
+            <small class="hint">Todos os grupos aparecem aqui. Você pode entrar se tiver menos de 100 pessoas.</small>
+          </div>
+          <div id="groupList" class="list"></div>
+        </div>
+        <div id="tabCalls" class="tab-page hidden"><div id="callList" class="list"></div></div>
+      </main>
+    </section>
+
+    <section id="chatScreen" class="screen hidden chat-layout">
+      <header class="chat-header glass">
+        <button id="btnBack" class="icon-btn">←</button>
+        <div class="avatar" id="chatAvatar">👤</div>
+        <div class="chat-title"><strong id="chatName">Contato</strong><small id="chatOnline">offline</small></div>
+        <button id="btnAudioCall" class="icon-btn">📞</button><button id="btnVideoCall" class="icon-btn">📹</button><button id="btnInfo" class="icon-btn">⋮</button>
+      </header>
+      <div id="messagesList" class="messages"></div>
+      <div id="replyBox" class="reply-box hidden"><span id="replyText"></span><button id="btnCancelReply">×</button></div>
+      <footer class="message-box glass">
+        <button id="btnMore" class="icon-btn">＋</button>
+        <div id="attachMenu" class="attach-menu hidden">
+          <button id="btnPickImage">📷 Foto</button><button id="btnPickDoc">📄 Documento</button><button id="btnLocation">📍 Localização</button>
+        </div>
+        <input id="imageInput" class="hidden" type="file" accept="image/*" />
+        <input id="docInput" class="hidden" type="file" />
+        <textarea id="messageText" placeholder="Digite uma mensagem"></textarea>
+        <button id="btnRecord" class="icon-btn">🎙️</button><button id="btnSend">➤</button>
+      </footer>
+    </section>
+
+    <aside id="infoPanel" class="info-panel hidden glass"><button id="btnCloseInfo" class="icon-btn close">×</button><div class="big-avatar" id="infoAvatar">👤</div><h2 id="infoName">Contato</h2><small id="infoStatus">offline</small><div class="info-actions"><button id="infoMsg">💬</button><button id="infoCall">📞</button><button id="infoVideo">📹</button></div><p id="infoBio"></p><div id="groupTools" class="group-tools hidden"><h3>Grupo</h3><small id="groupMembersCount">0/100 pessoas</small><input id="groupMemberEmail" placeholder="Email para adicionar ao grupo" /><button id="btnAddGroupMember">Adicionar pessoa</button><button id="btnLeaveGroup" class="danger-btn">Sair do grupo</button></div><h3>Mídias e documentos</h3><div id="mediaGrid" class="media-grid"></div></aside>
+
+    <section id="statusViewer" class="status-viewer hidden">
+      <div class="status-card-view glass">
+        <div class="status-top"><div class="avatar" id="viewerAvatar">👤</div><div><strong id="viewerName">Status</strong><small id="viewerTime">agora</small></div><button id="btnCloseStatus" class="icon-btn">×</button></div>
+        <div id="viewerContent" class="viewer-content"></div>
+        <div class="status-bottom"><button id="btnPrevStatus" class="secondary">← Anterior</button><button id="btnNextStatus">Próximo →</button></div>
+      </div>
+    </section>
+
+
+    <section id="callScreen" class="call-screen hidden">
+      <div class="call-box glass">
+        <div class="call-top">
+          <button id="btnCloseCall" class="icon-btn">×</button>
+          <div>
+            <strong id="callTitle">Chamada</strong>
+            <small id="callStatus">conectando...</small>
+          </div>
+        </div>
+        <div class="video-area">
+          <video id="remoteVideo" autoplay playsinline></video>
+          <video id="localVideo" autoplay playsinline muted></video>
+          <div id="audioAvatar" class="audio-avatar hidden">👤</div>
+        </div>
+        <div id="incomingActions" class="incoming-actions hidden">
+          <button id="btnAcceptCall">Atender</button>
+          <button id="btnRejectCall" class="danger-btn">Recusar</button>
+        </div>
+        <div id="callControls" class="call-controls">
+          <button id="btnMuteAudio" class="icon-btn">🎙️</button>
+          <button id="btnToggleVideo" class="icon-btn">📹</button>
+          <button id="btnEndCall" class="danger-btn">Encerrar</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="profileScreen" class="screen hidden">
+      <header class="chat-header glass"><button id="btnBackProfile" class="icon-btn">←</button><strong>Meu perfil</strong></header>
+      <div class="profile-card glass"><div class="big-avatar" id="profilePhotoPreview">👤</div><input id="profilePhoto" type="file" accept="image/*" /><input id="profileName" placeholder="Nome" /><input id="profileBio" placeholder="Recado" /><button id="btnSaveProfile">Salvar perfil</button></div>
+    </section>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="app.js?v=510"></script>
+</body>
+</html>
