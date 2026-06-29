@@ -17,6 +17,13 @@ const auth=firebase.auth(), db=firebase.database(), storage=firebase.storage();
 const $=id=>document.getElementById(id);
 let currentUser=null,currentChatUser=null,currentChatId=null,currentGroup=null,messagesListenerRef=null,mediaRecorder=null,audioChunks=[],recording=false,replyTo=null,deferredPrompt=null;
 
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+        .register("firebase-messaging-sw.js?v=516")
+        .then(() => console.log("Firebase Messaging registrado"))
+        .catch(console.error);
+}
+
 function show(id){["authScreen","homeScreen","chatScreen","profileScreen"].forEach(s=>{const el=$(s); if(el){el.classList.add("hidden"); el.style.display="none";}}); const target=$(id); if(target){target.classList.remove("hidden"); target.style.display="block";} const panel=$("infoPanel"); if(panel && id!=="chatScreen") panel.classList.add("hidden");}
 function toast(m){alert(String(m||"Erro"))}
 function safe(t){return String(t||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
